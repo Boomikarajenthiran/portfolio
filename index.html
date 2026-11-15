@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boomika R | MERN Full Stack React Developer & Codethon Winner</title>
+  <meta name="description" content="Portfolio of Boomika R - Built with React.js & Tailwind CSS. Aspiring MERN Full Stack Developer and SLA Codethon 2026 1st Place Winner." />
+  
+  <!-- Cache-Busting Headers to prevent browser from showing old version -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚛️</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React 18 & ReactDOM via CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <style>
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 35px -10px rgba(6, 182, 212, 0.3);
+    }
+    .glow-amber {
+      box-shadow: 0 0 35px -10px rgba(245, 158, 11, 0.3);
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #printable-resume, #printable-resume * {
+        visibility: visible !important;
+      }
+      #printable-resume {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        background: white !important;
+        color: black !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#090d16] text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white min-h-screen relative overflow-x-hidden">
+
+  <!-- Ambient Glow Bubbles -->
+  <div class="fixed top-0 left-1/4 -translate-x-1/2 w-[550px] h-[550px] bg-cyan-600/10 rounded-full blur-[130px] pointer-events-none -z-10 animate-pulse-slow"></div>
+  <div class="fixed top-1/3 right-10 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-10 left-1/3 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+
+  <!-- React 18 Application Mount Target -->
+  <div id="root"></div>
+
+  <!-- React 18 Native Application Logic (Zero Babel lag, executes instantly) -->
+  <script>
+    const e = React.createElement;
+    const { useState, useEffect } = React;
+
+    const CANDIDATE = {
+      name: "Boomika R",
+      role: "MERN Full Stack Developer",
+      phone: "+91 9361326817",
+      email: "boomikaboomi043@gmail.com",
+      location: "Chennai, Tamil Nadu, India",
+      github: "https://github.com/Boomikarajenthiran",
+      linkedin: "https://www.linkedin.com/in/boomika-r-932594315/",
+      college: "Musiri Institute of Technology, Trichy",
+      degree: "B.Sc. Computer Science (2023–2026)",
+      cgpa: "83.5%",
+      award: "1st Place Winner - SLA Codethon 2026"
+    };
+
+    // 6 BALANCED SKILLS CATEGORIES - ZERO AI / COMPUTER VISION
+    const SKILLS_LIST = [
+      {
+        id: "frontend",
+        title: "Frontend Development",
+        subtitle: "Modern UI & State Management",
+        icon: "💻",
+        borderClass: "hover:border-cyan-500/60",
+        pillClass: "border-cyan-500/30 text-cyan-300",
+        skills: ["React.js", "Tailwind CSS", "JavaScript (ES6+)", "HTML5 & Semantic Web", "CSS3 & Animations", "Bootstrap", "Streamlit", "Responsive Design"]
+      },
+      {
+        id: "backend",
+        title: "Backend & APIs",
+        subtitle: "Server Logic & Endpoints",
+        icon: "⚙️",
+        borderClass: "hover:border-emerald-500/60",
+        pillClass: "border-emerald-500/30 text-emerald-300",
+        skills: ["Node.js", "Express.js", "RESTful APIs", "Core Java", "JDBC", "CRUD Operations", "JSON Handling"]
+      },
+      {
+        id: "database",
+        title: "Databases",
+        subtitle: "Relational & Document Stores",
+        icon: "🗄️",
+        borderClass: "hover:border-violet-500/60",
+        pillClass: "border-violet-500/30 text-violet-300",
+        skills: ["MongoDB (NoSQL)", "MySQL", "SQL Querying", "Schema Design", "Data Modeling"]
+      },
+      {
+        id: "languages",
+        title: "Programming Languages",
+        subtitle: "Core Coding & Logic",
+        icon: "⚡",
+        borderClass: "hover:border-amber-500/60",
+        pillClass: "border-amber-500/30 text-amber-300",
+        skills: ["JavaScript (ES6+)", "Core Java", "Python", "SQL", "OOP Concepts", "Algorithms & Logic"]
+      },
+      {
+        id: "tools",
+        title: "Tools & Platforms",
+        subtitle: "Version Control & Workflow",
+        icon: "🛠️",
+        borderClass: "hover:border-blue-500/60",
+        pillClass: "border-blue-500/30 text-blue-300",
+        skills: ["Git & GitHub", "VS Code", "Chrome DevTools", "Postman", "Command Line / Bash"]
+      },
+      {
+        id: "principles",
+        title: "Software Principles",
+        subtitle: "Quality & Maintainability",
+        icon: "📐",
+        borderClass: "hover:border-pink-500/60",
+        pillClass: "border-pink-500/30 text-pink-300",
+        skills: ["Debugging & Profiling", "Code Optimization", "Component Reusability", "Software Design Basics", "Problem Solving"]
+      }
+    ];
+
+    const PROJECTS = [
+      {
+        id: "placement",
+        title: "Career Guidance & Placement Portal",
+        subtitle: "Team Project • Full Stack React & Placement Dashboard",
+        github: "https://github.com/Boomikarajenthiran/EmployeeSkillGapAnalyzer",
+        badge: "Full Stack React",
+        desc: "A comprehensive web application designed to analyze student skill gaps and guide students through placements with responsive dashboards and real-time backend communication.",
+        points: [
+          "Collaborated in a team using React.js and Tailwind CSS on frontend and Core Java / MySQL on backend.",
+          "Developed responsive Student and Admin dashboards with authentication, job listings, and tracking.",
+          "Integrated frontend components with REST APIs ensuring seamless communication."
+        ],
+        tags: ["React.js", "Tailwind CSS", "JavaScript (ES6+)", "Core Java", "JDBC", "REST API", "MySQL", "Git"],
+        arch: "[React.js Frontend + Tailwind CSS] ⇄ [REST API Layer] ⇄ [Core Java + JDBC] ⇄ [MySQL Database]"
+      },
+      {
+        id: "blink",
+        title: "Blink Guard - Driver Drowsiness Detection System",
+        subtitle: "Team Project • Road Safety Software System",
+        github: "https://github.com/Boomikarajenthiran/BlinkGuard-TeamProject",
+        badge: "Python System",
+        desc: "A real-time driver fatigue monitoring system built to reduce road accidents by detecting facial fatigue indicators and triggering immediate safety alerts.",
+        points: [
+          "Built a real-time driver fatigue monitoring software in Python to improve road safety.",
+          "Implemented eye blink frequency and closed-eye duration tracking algorithms.",
+          "System triggers immediate audio and visual warnings when fatigue thresholds are breached."
+        ],
+        tags: ["Python", "Fatigue Detection", "Real-Time Processing", "Audio Alert System", "Team Project"],
+        arch: "[Video Stream] ⇄ [Facial Coordinate Mapping] ⇄ [Fatigue Math Algorithm] ⇄ [Audio Alert]"
+      }
+    ];
+
+    function App() {
+      const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      const [resumeModalOpen, setResumeModalOpen] = useState(false);
+      const [selectedProject, setSelectedProject] = useState(null);
+      const [emailCopied, setEmailCopied] = useState(false);
+      const [contactForm, setContactForm] = useState({ name: "", email: "", subject: "", message: "" });
+      const [formStatus, setFormStatus] = useState("");
+
+      // Dynamic Typewriter in Hero using React useEffect
+      const [currentText, setCurrentText] = useState("");
+      const [titleIdx, setTitleIdx] = useState(0);
+      const [charIdx, setCharIdx] = useState(0);
+      const [isDeleting, setIsDeleting] = useState(false);
+
+      const titles = [
+        "MERN Full Stack Developer",
+        "React.js Specialist",
+        "SLA Codethon '26 First Place Winner",
+        "RESTful API & MongoDB Engineer",
+        "Responsive Web UI Developer"
+      ];
+
+      useEffect(() => {
+        const fullTitle = titles[titleIdx];
+        const speed = isDeleting ? 35 : 80;
+
+        const timer = setTimeout(() => {
+          if (!isDeleting && charIdx < fullTitle.length) {
+            setCurrentText(fullTitle.substring(0, charIdx + 1));
+            setCharIdx(prev => prev + 1);
+          } else if (!isDeleting && charIdx === fullTitle.length) {
+            setTimeout(() => setIsDeleting(true), 1700);
+          } else if (isDeleting && charIdx > 0) {
+            setCurrentText(fullTitle.substring(0, charIdx - 1));
+            setCharIdx(prev => prev - 1);
+          } else if (isDeleting && charIdx === 0) {
+            setIsDeleting(false);
+            setTitleIdx(prev => (prev + 1) % titles.length);
+          }
+        }, speed);
+
+        return () => clearTimeout(timer);
+      }, [charIdx, isDeleting, titleIdx]);
+
+      const handleCopyEmail = () => {
+        navigator.clipboard.writeText(CANDIDATE.email).then(() => {
+          setEmailCopied(true);
+          setTimeout(() => setEmailCopied(false), 3000);
+        });
+      };
+
+      const handleContactSubmit = (ev) => {
+        ev.preventDefault();
+        const mailto = `mailto:${CANDIDATE.email}?subject=${encodeURIComponent(contactForm.subject)}&body=${encodeURIComponent("Sender: " + contactForm.name + " (" + contactForm.email + ")\n\n" + contactForm.message)}`;
+        setFormStatus("Redirecting to email client...");
+        setTimeout(() => {
+          window.location.href = mailto;
+        }, 500);
+      };
+
+      return e("div", { className: "min-h-screen relative" },
+        
+        // 1. TOP ANNOUNCEMENT BANNER
+        e("div", { className: "bg-gradient-to-r from-cyan-950 via-slate-900 to-violet-950 border-b border-cyan-500/20 px-4 py-2 text-xs text-center font-medium" },
+          e("div", { className: "max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap" },
+            e("span", { className: "inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30" },
+              e("span", { className: "w-1.5 h-1.5 rounded-full bg-cyan-400 mr-1.5" }),
+              "React 18 & MERN"
+            ),
+            e("span", { className: "text-slate-300" }, "⚡ React 18 Portfolio • MERN Full Stack Developer & SLA Codethon Winner"),
+            e("a", { href: "#projects", className: "text-cyan-400 hover:text-cyan-300 font-semibold underline underline-offset-4 ml-1" }, "Explore Work →")
+          )
+        ),
+
+        // 2. NAVBAR
+        e("header", { className: "sticky top-0 z-50 backdrop-blur-xl bg-[#090d16]/80 border-b border-slate-800/80" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between" },
+            e("a", { href: "#", className: "flex items-center gap-2.5 group" },
+              e("div", { className: "w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-violet-600 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/20" },
+                e("span", { className: "text-sm font-mono" }, "<BR/>")
+              ),
+              e("div", null,
+                e("span", { className: "text-lg font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors flex items-center gap-1.5" },
+                  "Boomika", e("span", { className: "text-cyan-400" }, ".dev"),
+                  e("span", { className: "text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 px-1.5 py-0.2 rounded font-normal" }, "React 18")
+                ),
+                e("span", { className: "block text-[10px] text-slate-400 -mt-1 font-mono tracking-wider" }, "MERN STACK")
+              )
+            ),
+            e("nav", { className: "hidden md:flex items-center space-x-1 lg:space-x-2" },
+              e("a", { href: "#about", className: "px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors" }, "About"),
+              e("a", { href: "#skills", className: "px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors" }, "Skills"),
+              e("a", { href: "#projects", className: "px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors" }, "Projects"),
+              e("a", { href: "#achievements", className: "px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors" }, "Achievements"),
+              e("a", { href: "#education", className: "px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors" }, "Education"),
+              e("a", { href: "#contact", className: "px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors" }, "Contact")
+            ),
+            e("div", { className: "flex items-center gap-3" },
+              e("button", {
+                onClick: () => setResumeModalOpen(true),
+                className: "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800/90 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/10 hover:border-cyan-400 transition-all"
+              }, "📄 Resume"),
+              e("a", {
+                href: "#contact",
+                className: "inline-flex items-center gap-2 px-4 py-2 text-xs md:text-sm font-bold rounded-lg bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 text-white shadow-md shadow-cyan-500/25 hover:scale-[1.02] transition-all"
+              }, "Hire Me →"),
+              e("button", {
+                onClick: () => setMobileMenuOpen(!mobileMenuOpen),
+                className: "md:hidden p-2 text-slate-400 hover:text-white"
+              }, mobileMenuOpen ? "✕" : "☰")
+            )
+          ),
+          mobileMenuOpen && e("div", { className: "md:hidden px-4 pt-2 pb-6 space-y-2 border-b border-slate-800 bg-[#090d16]/95 backdrop-blur-2xl" },
+            e("a", { href: "#about", onClick: () => setMobileMenuOpen(false), className: "block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800" }, "About"),
+            e("a", { href: "#skills", onClick: () => setMobileMenuOpen(false), className: "block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800" }, "Skills"),
+            e("a", { href: "#projects", onClick: () => setMobileMenuOpen(false), className: "block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800" }, "Projects"),
+            e("a", { href: "#achievements", onClick: () => setMobileMenuOpen(false), className: "block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800" }, "Achievements"),
+            e("a", { href: "#education", onClick: () => setMobileMenuOpen(false), className: "block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800" }, "Education"),
+            e("a", { href: "#contact", onClick: () => setMobileMenuOpen(false), className: "block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800" }, "Contact")
+          )
+        ),
+
+        // 3. HERO SECTION
+        e("section", { className: "relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "grid grid-cols-1 lg:grid-cols-12 gap-10 items-center" },
+              e("div", { className: "lg:col-span-7 space-y-6 text-center lg:text-left" },
+                e("div", { className: "inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-xs font-semibold text-cyan-300" },
+                  e("span", { className: "relative flex h-2.5 w-2.5" },
+                    e("span", { className: "relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400" })
+                  ),
+                  "MERN Full Stack Developer • Chennai, India"
+                ),
+                e("div", null,
+                  e("p", { className: "text-sm font-mono uppercase tracking-widest text-slate-400 flex items-center justify-center lg:justify-start gap-2" },
+                    e("span", null, "Hello World, I'm"),
+                    e("span", { className: "text-[11px] px-2 py-0.5 rounded bg-blue-950 text-cyan-300 border border-cyan-800 font-mono" }, "React 18")
+                  ),
+                  e("h1", { className: "text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mt-1" },
+                    e("span", { className: "text-white" }, "Boomika "),
+                    e("span", { className: "text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500" }, "R")
+                  ),
+                  e("div", { className: "h-10 sm:h-12 flex items-center justify-center lg:justify-start text-xl sm:text-2xl md:text-3xl font-bold font-mono text-cyan-400 mt-2" },
+                    e("span", null, currentText),
+                    e("span", { className: "animate-pulse ml-0.5 text-white" }, "|")
+                  )
+                ),
+                e("p", { className: "text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0" },
+                  "Aspiring ", e("strong", { className: "text-white font-semibold" }, "MERN Full Stack Developer"), " with a strong passion for developing dynamic, responsive web applications with ",
+                  e("span", { className: "text-cyan-400 font-medium" }, "React.js, Node.js, Express.js, MongoDB"), " and ",
+                  e("span", { className: "text-blue-400 font-medium" }, "Tailwind CSS"), ". ",
+                  "Secured ", e("strong", { className: "text-amber-400" }, "1st Place in SLA Codethon 2026"), " for building a standout React Full Stack project."
+                ),
+                e("div", { className: "flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2" },
+                  e("a", { href: "#projects", className: "px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-sm shadow-lg shadow-cyan-500/25 hover:scale-[1.02] transition-all" }, "⚡ Explore Projects"),
+                  e("button", { onClick: () => setResumeModalOpen(true), className: "px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white hover:border-cyan-400 font-semibold text-sm transition-all" }, "📄 View ATS Resume"),
+                  e("a", { href: "https://wa.me/919361326817?text=Hi%20Boomika,%20we%20reviewed%20your%20React%20portfolio%20and%20would%20love%20to%20connect!", target: "_blank", className: "px-4 py-3 rounded-xl bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-900/50 text-sm font-semibold transition-all" }, "💬 WhatsApp HR Chat")
+                ),
+                e("div", { className: "pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-mono text-slate-400" },
+                  e("a", { href: CANDIDATE.github, target: "_blank", className: "hover:text-cyan-400 transition-colors" }, "🐙 GitHub: Boomikarajenthiran"),
+                  e("span", null, "•"),
+                  e("a", { href: CANDIDATE.linkedin, target: "_blank", className: "hover:text-cyan-400 transition-colors" }, "💼 LinkedIn: Boomika R"),
+                  e("span", null, "•"),
+                  e("a", { href: `mailto:${CANDIDATE.email}`, className: "hover:text-cyan-400 transition-colors" }, "✉️ boomikaboomi043@gmail.com")
+                )
+              ),
+
+              // Right Card: 30-Sec Flash Recruiter Box
+              e("div", { className: "lg:col-span-5" },
+                e("div", { className: "glass-card rounded-2xl p-6 glow-cyan border border-slate-700/80 relative shadow-2xl" },
+                  e("div", { className: "flex items-center justify-between pb-4 border-b border-slate-800" },
+                    e("div", { className: "flex items-center space-x-2" },
+                      e("div", { className: "w-3 h-3 rounded-full bg-rose-500" }),
+                      e("div", { className: "w-3 h-3 rounded-full bg-amber-500" }),
+                      e("div", { className: "w-3 h-3 rounded-full bg-emerald-500" })
+                    ),
+                    e("div", { className: "text-[11px] font-mono text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800" }, "candidate-profile.json")
+                  ),
+                  e("div", { className: "mt-5 space-y-4 font-mono text-xs" },
+                    e("div", { className: "flex items-center gap-3" },
+                      e("div", { className: "w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-md" }, "BR"),
+                      e("div", null,
+                        e("h3", { className: "text-white font-sans font-bold text-base" }, CANDIDATE.name),
+                        e("p", { className: "text-cyan-400 font-sans text-xs" }, "MERN Full Stack Developer")
+                      )
+                    ),
+                    e("div", { className: "space-y-1.5 text-slate-300 bg-slate-900/90 p-4 rounded-xl border border-slate-800 text-[11px] leading-relaxed" },
+                      e("p", null, e("span", { className: "text-cyan-400" }, "\"degree\": "), e("span", { className: "text-amber-300" }, "\"B.Sc. Computer Science (2023–2026)\""), ","),
+                      e("p", null, e("span", { className: "text-cyan-400" }, "\"cgpa\": "), e("span", { className: "text-cyan-300" }, "83.5"), ","),
+                      e("p", null, e("span", { className: "text-cyan-400" }, "\"bestAchievement\": "), e("span", { className: "text-yellow-400" }, "\"🏆 1st Place - SLA Codethon 2026\""), ","),
+                      e("p", null, e("span", { className: "text-cyan-400" }, "\"coreStack\": "), "[\"React.js\", \"Node.js\", \"Express.js\", \"MongoDB\", \"Tailwind\"],"),
+                      e("p", null, e("span", { className: "text-cyan-400" }, "\"location\": "), e("span", { className: "text-slate-200" }, "\"Chennai / Open to Relocation\""))
+                    ),
+                    e("div", { className: "grid grid-cols-2 gap-2 pt-1 font-sans" },
+                      e("a", { href: `tel:${CANDIDATE.phone}`, className: "py-2.5 px-3 text-center rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors" }, "📞 Call: 9361326817"),
+                      e("button", { onClick: handleCopyEmail, className: "py-2.5 px-3 text-center rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/30 text-cyan-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors" }, "📋 Copy Email")
+                    ),
+                    emailCopied && e("div", { className: "text-center text-[11px] text-emerald-400 font-sans py-1 animate-pulse" }, "✓ Email copied: boomikaboomi043@gmail.com")
+                  )
+                )
+              )
+            )
+          )
+        ),
+
+        // 4. STATS BAR
+        e("section", { className: "py-8 border-y border-slate-800/80 bg-slate-950/60" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-6 text-center" },
+              e("div", { className: "p-4 rounded-xl glass-card border border-slate-800 hover:border-amber-500/40 transition-colors" },
+                e("div", { className: "text-3xl lg:text-4xl font-extrabold text-amber-400 font-mono" }, "1st Place"),
+                e("div", { className: "text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold" }, "SLA Codethon 2026 Winner")
+              ),
+              e("div", { className: "p-4 rounded-xl glass-card border border-slate-800 hover:border-cyan-500/40 transition-colors" },
+                e("div", { className: "text-3xl lg:text-4xl font-extrabold text-cyan-400 font-mono" }, "83.5%"),
+                e("div", { className: "text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold" }, "B.Sc Computer Science CGPA")
+              ),
+              e("div", { className: "p-4 rounded-xl glass-card border border-slate-800 hover:border-emerald-500/40 transition-colors" },
+                e("div", { className: "text-3xl lg:text-4xl font-extrabold text-emerald-400 font-mono" }, "100%"),
+                e("div", { className: "text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold" }, "MERN Full Stack Dedication")
+              ),
+              e("div", { className: "p-4 rounded-xl glass-card border border-slate-800 hover:border-violet-500/40 transition-colors" },
+                e("div", { className: "text-3xl lg:text-4xl font-extrabold text-violet-400 font-mono" }, "React 18"),
+                e("div", { className: "text-xs uppercase tracking-wider text-slate-400 mt-1 font-semibold" }, "Modern Component Architecture")
+              )
+            )
+          )
+        ),
+
+        // 5. ABOUT SECTION
+        e("section", { id: "about", className: "py-20 relative" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "text-center max-w-3xl mx-auto mb-16" },
+              e("span", { className: "text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold" }, "About The Developer"),
+              e("h2", { className: "text-3xl md:text-4xl font-extrabold text-white mt-2" }, "Engineering Modern Web Experiences with Precision"),
+              e("div", { className: "w-16 h-1 bg-gradient-to-r from-cyan-500 to-violet-500 mx-auto mt-4 rounded-full" })
+            ),
+            e("div", { className: "grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch" },
+              e("div", { className: "lg:col-span-7 glass-card p-8 rounded-2xl border border-slate-800 flex flex-col justify-between" },
+                e("div", { className: "space-y-4 text-slate-300 text-sm md:text-base leading-relaxed" },
+                  e("h3", { className: "text-xl font-bold text-white flex items-center gap-2" },
+                    e("span", null, "Who I Am"),
+                    e("span", { className: "text-xs font-mono bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded border border-cyan-800" }, "MERN Developer")
+                  ),
+                  e("p", null,
+                    "I am an aspiring ", e("strong", { className: "text-white" }, "MERN Full Stack Developer"),
+                    " currently pursuing my Bachelor's degree in Computer Science at ",
+                    e("span", { className: "text-cyan-400" }, CANDIDATE.college),
+                    ", maintaining a strong academic record with an ",
+                    e("strong", { className: "text-amber-400" }, "83.5% CGPA"), "."
+                  ),
+                  e("p", null,
+                    "My core focus is centered on building high-performance, responsive single-page web applications using ",
+                    e("strong", { className: "text-cyan-400" }, "React.js"), ", clean utility styling with ",
+                    e("strong", { className: "text-blue-400" }, "Tailwind CSS"), ", and scalable RESTful APIs on ",
+                    e("strong", { className: "text-emerald-400" }, "Node.js, Express.js, MongoDB"), ", and ",
+                    e("strong", { className: "text-violet-400" }, "MySQL"), "."
+                  ),
+                  e("p", null,
+                    "I won ", e("strong", { className: "text-yellow-400" }, "First Place in SLA Codethon 2026"),
+                    " for delivering an end-to-end React Full Stack web application evaluated on code architecture and responsive UI design. I love solving real-world challenges and writing clean code."
+                  )
+                ),
+                e("div", { className: "pt-6 mt-6 border-t border-slate-800/80" },
+                  e("span", { className: "text-xs font-mono text-slate-400 uppercase tracking-wider block mb-3 font-semibold" }, "Core Attributes"),
+                  e("div", { className: "flex flex-wrap gap-2" },
+                    e("span", { className: "px-3 py-1 rounded-lg bg-slate-900 text-slate-200 text-xs border border-slate-800" }, "Clean React Architecture"),
+                    e("span", { className: "px-3 py-1 rounded-lg bg-slate-900 text-slate-200 text-xs border border-slate-800" }, "RESTful API Integration"),
+                    e("span", { className: "px-3 py-1 rounded-lg bg-slate-900 text-slate-200 text-xs border border-slate-800" }, "Responsive UI/UX"),
+                    e("span", { className: "px-3 py-1 rounded-lg bg-slate-900 text-slate-200 text-xs border border-slate-800" }, "Agile Collaboration"),
+                    e("span", { className: "px-3 py-1 rounded-lg bg-slate-900 text-slate-200 text-xs border border-slate-800" }, "Problem Solving")
+                  )
+                )
+              ),
+              e("div", { className: "lg:col-span-5 space-y-4" },
+                e("div", { className: "glass-card p-6 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-950/20 to-slate-900" },
+                  e("div", { className: "flex items-center gap-3" },
+                    e("div", { className: "w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30" }, "🏆"),
+                    e("div", null,
+                      e("h4", { className: "text-base font-bold text-white" }, "SLA Codethon 2026 Champion"),
+                      e("p", { className: "text-xs text-amber-300 font-mono" }, "1st Place • React Full Stack Project")
+                    )
+                  ),
+                  e("p", { className: "text-xs text-slate-300 mt-3 leading-relaxed" },
+                    "Awarded top honors for designing and presenting an end-to-end full stack React application under timed competition."
+                  )
+                ),
+                e("div", { className: "glass-card p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/20 to-slate-900" },
+                  e("div", { className: "flex items-center gap-3" },
+                    e("div", { className: "w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl border border-cyan-500/30" }, "🎓"),
+                    e("div", null,
+                      e("h4", { className: "text-base font-bold text-white" }, "Academic Distinction"),
+                      e("p", { className: "text-xs text-cyan-300 font-mono" }, "B.Sc. Computer Science (2023–2026)")
+                    )
+                  ),
+                  e("p", { className: "text-xs text-slate-300 mt-3 leading-relaxed" },
+                    "Musiri Institute of Technology, Trichy • 83.5% CGPA in College, 83% in HSC (12th), and 80% in SSLC (10th)."
+                  )
+                ),
+                e("div", { className: "glass-card p-6 rounded-2xl border border-violet-500/30 bg-gradient-to-br from-violet-950/20 to-slate-900" },
+                  e("div", { className: "flex items-center gap-3" },
+                    e("div", { className: "w-12 h-12 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center text-xl border border-violet-500/30" }, "📜"),
+                    e("div", null,
+                      e("h4", { className: "text-base font-bold text-white" }, "Advanced Full Stack Training"),
+                      e("p", { className: "text-xs text-violet-300 font-mono" }, "MERN Architecture & Industry Standards")
+                    )
+                  ),
+                  e("p", { className: "text-xs text-slate-300 mt-3 leading-relaxed" },
+                    "Practical training covering MERN architecture, RESTful API design, version control, and production deployment standards."
+                  )
+                )
+              )
+            )
+          )
+        ),
+
+        // 6. SKILLS MATRIX SECTION - 6 CLEAN BALANCED CARDS (NO AI / COMPUTER VISION)
+        e("section", { id: "skills", className: "py-20 relative bg-slate-950/40 border-t border-slate-800/80" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "text-center max-w-3xl mx-auto mb-12" },
+              e("span", { className: "text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold" }, "TECHNICAL ARSENAL"),
+              e("h2", { className: "text-3xl md:text-4xl font-extrabold text-white mt-2" }, "Skills, Frameworks & Technologies"),
+              e("p", { className: "text-slate-400 text-sm mt-3" }, "A comprehensive overview of my technical stack across Frontend, Backend, Databases, and Core Engineering."),
+              e("div", { className: "w-16 h-1 bg-gradient-to-r from-cyan-500 to-violet-500 mx-auto mt-4 rounded-full" })
+            ),
+
+            // 6 Grid Cards
+            e("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" },
+              SKILLS_LIST.map((item) =>
+                e("div", {
+                  key: item.id,
+                  className: `glass-card p-6 rounded-2xl border border-slate-800 ${item.borderClass} transition-all duration-300 hover:-translate-y-1`
+                },
+                  e("div", { className: "flex items-center gap-3 mb-5" },
+                    e("div", { className: "w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center text-xl border border-slate-800" }, item.icon),
+                    e("div", null,
+                      e("h3", { className: "text-lg font-bold text-white" }, item.title),
+                      e("p", { className: "text-xs text-slate-400 font-mono" }, item.subtitle)
+                    )
+                  ),
+                  e("div", { className: "flex flex-wrap gap-2" },
+                    item.skills.map((s, idx) =>
+                      e("span", {
+                        key: idx,
+                        className: `px-3 py-1.5 rounded-lg bg-slate-900/90 border ${item.pillClass} text-xs font-medium`
+                      }, s)
+                    )
+                  )
+                )
+              )
+            )
+          )
+        ),
+
+        // 7. FEATURED PROJECTS
+        e("section", { id: "projects", className: "py-20 relative" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "text-center max-w-3xl mx-auto mb-16" },
+              e("span", { className: "text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold" }, "Real-World Applications"),
+              e("h2", { className: "text-3xl md:text-4xl font-extrabold text-white mt-2" }, "Featured Projects & Codebases"),
+              e("p", { className: "text-slate-400 text-sm mt-3" }, "Practical full-stack web and software engineering projects with live GitHub repositories."),
+              e("div", { className: "w-16 h-1 bg-gradient-to-r from-cyan-500 to-violet-500 mx-auto mt-4 rounded-full" })
+            ),
+            e("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-8" },
+              PROJECTS.map((proj) =>
+                e("div", {
+                  key: proj.id,
+                  className: "glass-card rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between group shadow-xl"
+                },
+                  e("div", null,
+                    e("div", { className: "bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between" },
+                      e("div", { className: "flex items-center space-x-2" },
+                        e("div", { className: "w-3 h-3 rounded-full bg-rose-500/80" }),
+                        e("div", { className: "w-3 h-3 rounded-full bg-amber-500/80" }),
+                        e("div", { className: "w-3 h-3 rounded-full bg-emerald-500/80" })
+                      ),
+                      e("div", { className: "text-[11px] font-mono text-slate-400 truncate max-w-xs" }, proj.github.replace("https://", "")),
+                      e("span", { className: "text-[10px] uppercase font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800" }, proj.badge)
+                    ),
+                    e("div", { className: "p-6 md:p-8 space-y-4" },
+                      e("div", null,
+                        e("h3", { className: "text-xl md:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors" }, proj.title),
+                        e("p", { className: "text-xs font-mono text-cyan-400 mt-1" }, proj.subtitle)
+                      ),
+                      e("p", { className: "text-slate-300 text-sm leading-relaxed" }, proj.desc),
+                      e("ul", { className: "space-y-2 text-xs text-slate-300" },
+                        proj.points.map((pt, i) =>
+                          e("li", { key: i, className: "flex items-start gap-2" },
+                            e("span", { className: "text-cyan-400 font-bold" }, "•"),
+                            e("span", null, pt)
+                          )
+                        )
+                      ),
+                      e("div", { className: "pt-2 flex flex-wrap gap-1.5" },
+                        proj.tags.map((tg, i) =>
+                          e("span", { key: i, className: "px-2.5 py-1 rounded bg-slate-900 border border-slate-700 text-[11px] font-mono text-slate-200" }, tg)
+                        )
+                      )
+                    )
+                  ),
+                  e("div", { className: "px-6 md:px-8 py-4 bg-slate-900/70 border-t border-slate-800 flex items-center justify-between" },
+                    e("a", { href: proj.github, target: "_blank", className: "text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 transition-colors" }, "View Repository on GitHub →"),
+                    e("button", { onClick: () => setSelectedProject(proj), className: "text-xs font-semibold text-slate-300 hover:text-white underline underline-offset-4" }, "Architecture Breakdown")
+                  )
+                )
+              )
+            )
+          )
+        ),
+
+        // 8. ACHIEVEMENTS & CERTIFICATIONS
+        e("section", { id: "achievements", className: "py-20 relative bg-slate-950/40 border-t border-slate-800/80" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "text-center max-w-3xl mx-auto mb-16" },
+              e("span", { className: "text-xs font-mono text-amber-400 uppercase tracking-widest font-semibold" }, "Honors & Milestones"),
+              e("h2", { className: "text-3xl md:text-4xl font-extrabold text-white mt-2" }, "Certifications & Achievements"),
+              e("div", { className: "w-16 h-1 bg-gradient-to-r from-amber-500 to-cyan-500 mx-auto mt-4 rounded-full" })
+            ),
+            e("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" },
+              e("div", { className: "glass-card rounded-2xl p-8 border border-amber-500/40 glow-amber relative overflow-hidden" },
+                e("div", { className: "flex items-center justify-between mb-4" },
+                  e("span", { className: "text-3xl" }, "🥇"),
+                  e("span", { className: "px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30" }, "SLA CODETHON 2026")
+                ),
+                e("h3", { className: "text-xl font-bold text-white" }, "First Place Winner • React Full Stack Project"),
+                e("p", { className: "text-xs font-mono text-cyan-400 mt-1" }, "Hackathon Gold Medalist"),
+                e("p", { className: "text-slate-300 text-sm mt-4 leading-relaxed" },
+                  "Secured 1st Prize in the competitive SLA Codethon 2026 for engineering a full-stack React project, assessed by industry evaluators for responsiveness, component modularity, clean APIs, and UI perfection."
+                ),
+                e("div", { className: "mt-6 text-xs font-semibold text-amber-400" }, "✓ Verified Achievement • React Full Stack Innovation")
+              ),
+              e("div", { className: "glass-card rounded-2xl p-8 border border-violet-500/40 glow-cyan relative overflow-hidden" },
+                e("div", { className: "flex items-center justify-between mb-4" },
+                  e("span", { className: "text-3xl" }, "📜"),
+                  e("span", { className: "px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30" }, "PROFESSIONAL")
+                ),
+                e("h3", { className: "text-xl font-bold text-white" }, "Advanced Full Stack Development"),
+                e("p", { className: "text-xs font-mono text-violet-400 mt-1" }, "Industry-Aligned Training Certification"),
+                e("p", { className: "text-slate-300 text-sm mt-4 leading-relaxed" },
+                  "Hands-on training focusing on MERN stack architecture, RESTful API development, schema modeling in MongoDB and MySQL, version control workflows, and production deployment standards."
+                ),
+                e("div", { className: "mt-6 text-xs font-semibold text-violet-400" }, "✓ MERN Stack • REST APIs • Software Engineering")
+              )
+            )
+          )
+        ),
+
+        // 9. EDUCATION
+        e("section", { id: "education", className: "py-20 relative" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "text-center max-w-3xl mx-auto mb-16" },
+              e("span", { className: "text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold" }, "Academic Foundation"),
+              e("h2", { className: "text-3xl md:text-4xl font-extrabold text-white mt-2" }, "Education & Qualifications"),
+              e("div", { className: "w-16 h-1 bg-gradient-to-r from-cyan-500 to-violet-500 mx-auto mt-4 rounded-full" })
+            ),
+            e("div", { className: "max-w-3xl mx-auto space-y-5" },
+              e("div", { className: "glass-card p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4" },
+                e("div", { className: "space-y-1" },
+                  e("div", { className: "flex items-center gap-2" },
+                    e("span", { className: "w-2.5 h-2.5 rounded-full bg-cyan-400" }),
+                    e("h3", { className: "text-lg font-bold text-white" }, "B.Sc. Computer Science")
+                  ),
+                  e("p", { className: "text-xs text-slate-400" }, CANDIDATE.college),
+                  e("p", { className: "text-xs font-mono text-slate-500" }, "2023 – 2026")
+                ),
+                e("div", { className: "text-left sm:text-right" },
+                  e("span", { className: "inline-block px-3 py-1 rounded-full bg-cyan-950 text-cyan-300 font-mono font-bold text-sm border border-cyan-800" }, "CGPA: 83.5%"),
+                  e("p", { className: "text-[11px] text-slate-400 mt-1" }, "First Class with Distinction Track")
+                )
+              ),
+              e("div", { className: "glass-card p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4" },
+                e("div", { className: "space-y-1" },
+                  e("div", { className: "flex items-center gap-2" },
+                    e("span", { className: "w-2.5 h-2.5 rounded-full bg-slate-500" }),
+                    e("h3", { className: "text-base font-bold text-white" }, "HSC (Higher Secondary - 12th)")
+                  ),
+                  e("p", { className: "text-xs text-slate-400" }, "Government Girls Higher Secondary School")
+                ),
+                e("div", { className: "text-left sm:text-right" },
+                  e("span", { className: "inline-block px-3 py-1 rounded-full bg-slate-900 text-slate-200 font-mono font-bold text-sm border border-slate-700" }, "Score: 83%")
+                )
+              ),
+              e("div", { className: "glass-card p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4" },
+                e("div", { className: "space-y-1" },
+                  e("div", { className: "flex items-center gap-2" },
+                    e("span", { className: "w-2.5 h-2.5 rounded-full bg-slate-500" }),
+                    e("h3", { className: "text-base font-bold text-white" }, "SSLC (Secondary School - 10th)")
+                  ),
+                  e("p", { className: "text-xs text-slate-400" }, "Government Higher Secondary School")
+                ),
+                e("div", { className: "text-left sm:text-right" },
+                  e("span", { className: "inline-block px-3 py-1 rounded-full bg-slate-900 text-slate-200 font-mono font-bold text-sm border border-slate-700" }, "Score: 80%")
+                )
+              )
+            )
+          )
+        ),
+
+        // 10. CONTACT SECTION
+        e("section", { id: "contact", className: "py-20 relative bg-slate-950/60 border-t border-slate-800/80" },
+          e("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" },
+            e("div", { className: "text-center max-w-3xl mx-auto mb-16" },
+              e("span", { className: "text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold" }, "Let's Connect"),
+              e("h2", { className: "text-3xl md:text-4xl font-extrabold text-white mt-2" }, "Get In Touch With Boomika"),
+              e("p", { className: "text-slate-400 text-sm mt-3" }, "Open for full-time MERN stack opportunities, frontend developer roles, and internships."),
+              e("div", { className: "w-16 h-1 bg-gradient-to-r from-cyan-500 to-violet-500 mx-auto mt-4 rounded-full" })
+            ),
+            e("div", { className: "grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-5xl mx-auto" },
+              e("div", { className: "lg:col-span-5 space-y-4" },
+                e("a", { href: `mailto:${CANDIDATE.email}`, className: "glass-card p-5 rounded-2xl border border-slate-800 hover:border-cyan-500/50 flex items-center gap-4 transition-all group" },
+                  e("div", { className: "w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl" }, "✉️"),
+                  e("div", { className: "truncate" },
+                    e("span", { className: "text-xs font-mono text-slate-400 uppercase" }, "Direct Email"),
+                    e("p", { className: "text-sm font-bold text-white group-hover:text-cyan-400 transition-colors truncate" }, CANDIDATE.email)
+                  )
+                ),
+                e("a", { href: `tel:${CANDIDATE.phone}`, className: "glass-card p-5 rounded-2xl border border-slate-800 hover:border-emerald-500/50 flex items-center gap-4 transition-all group" },
+                  e("div", { className: "w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl" }, "📞"),
+                  e("div", null,
+                    e("span", { className: "text-xs font-mono text-slate-400 uppercase" }, "Phone Call"),
+                    e("p", { className: "text-sm font-bold text-white group-hover:text-emerald-400 transition-colors" }, CANDIDATE.phone)
+                  )
+                ),
+                e("a", { href: "https://wa.me/919361326817?text=Hi%20Boomika,%20we%20reviewed%20your%20React%20portfolio%20and%20would%20love%20to%20connect!", target: "_blank", className: "glass-card p-5 rounded-2xl border border-slate-800 hover:border-emerald-500/50 flex items-center gap-4 transition-all group" },
+                  e("div", { className: "w-12 h-12 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-xl" }, "💬"),
+                  e("div", null,
+                    e("span", { className: "text-xs font-mono text-slate-400 uppercase" }, "WhatsApp Chat"),
+                    e("p", { className: "text-sm font-bold text-white group-hover:text-emerald-400 transition-colors" }, "Start Instant Chat")
+                  )
+                ),
+                e("div", { className: "glass-card p-5 rounded-2xl border border-slate-800 flex items-center gap-4" },
+                  e("div", { className: "w-12 h-12 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center text-xl" }, "📍"),
+                  e("div", null,
+                    e("span", { className: "text-xs font-mono text-slate-400 uppercase" }, "Location"),
+                    e("p", { className: "text-sm font-bold text-white" }, CANDIDATE.location),
+                    e("p", { className: "text-xs text-slate-400" }, "Open to Relocation & Remote")
+                  )
+                )
+              ),
+              e("div", { className: "lg:col-span-7 glass-card p-8 rounded-2xl border border-slate-800 glow-cyan" },
+                e("h3", { className: "text-xl font-bold text-white mb-2" }, "Send Direct Message"),
+                e("p", { className: "text-xs text-slate-400 mb-6" }, "Fill out this form to connect directly via email client."),
+                e("form", { onSubmit: handleContactSubmit, className: "space-y-4" },
+                  e("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4" },
+                    e("div", null,
+                      e("label", { className: "block text-xs font-mono text-slate-300 mb-1" }, "Your Name / Company"),
+                      e("input", {
+                        type: "text",
+                        required: true,
+                        value: contactForm.name,
+                        onChange: (ev) => setContactForm({ ...contactForm, name: ev.target.value }),
+                        placeholder: "e.g. HR Manager / Tech Lead",
+                        className: "w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                      })
+                    ),
+                    e("div", null,
+                      e("label", { className: "block text-xs font-mono text-slate-300 mb-1" }, "Your Email"),
+                      e("input", {
+                        type: "email",
+                        required: true,
+                        value: contactForm.email,
+                        onChange: (ev) => setContactForm({ ...contactForm, email: ev.target.value }),
+                        placeholder: "recruiter@company.com",
+                        className: "w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                      })
+                    )
+                  ),
+                  e("div", null,
+                    e("label", { className: "block text-xs font-mono text-slate-300 mb-1" }, "Subject"),
+                    e("input", {
+                      type: "text",
+                      required: true,
+                      value: contactForm.subject,
+                      onChange: (ev) => setContactForm({ ...contactForm, subject: ev.target.value }),
+                      placeholder: "MERN Developer Interview Opportunity",
+                      className: "w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                    })
+                  ),
+                  e("div", null,
+                    e("label", { className: "block text-xs font-mono text-slate-300 mb-1" }, "Message"),
+                    e("textarea", {
+                      rows: "4",
+                      required: true,
+                      value: contactForm.message,
+                      onChange: (ev) => setContactForm({ ...contactForm, message: ev.target.value }),
+                      placeholder: "Share details regarding the role, tech stack, and next steps...",
+                      className: "w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                    })
+                  ),
+                  e("button", {
+                    type: "submit",
+                    className: "w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-violet-600 text-white font-bold text-xs uppercase tracking-wider hover:opacity-95 transition-opacity shadow-lg shadow-cyan-500/25"
+                  }, "Send Message via Mail →"),
+                  formStatus && e("div", { className: "text-center text-xs py-2 text-emerald-400 font-medium" }, "✓ " + formStatus)
+                )
+              )
+            )
+          )
+        ),
+
+        // 11. FOOTER
+        e("footer", { className: "py-8 border-t border-slate-800 text-center text-xs text-slate-500 bg-[#060910]" },
+          e("div", { className: "max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4" },
+            e("div", { className: "flex items-center gap-2" },
+              e("span", { className: "font-bold text-slate-300" }, CANDIDATE.name),
+              e("span", null, "•"),
+              e("span", null, "MERN Full Stack React Developer")
+            ),
+            e("div", { className: "font-mono text-cyan-400" }, "Built with React 18 & Tailwind CSS • 2026"),
+            e("div", { className: "flex items-center space-x-4" },
+              e("a", { href: CANDIDATE.github, target: "_blank", className: "hover:text-cyan-400 transition-colors" }, "GitHub"),
+              e("a", { href: CANDIDATE.linkedin, target: "_blank", className: "hover:text-cyan-400 transition-colors" }, "LinkedIn"),
+              e("button", { onClick: () => setResumeModalOpen(true), className: "hover:text-cyan-400 transition-colors" }, "Resume")
+            )
+          )
+        ),
+
+        // 12. RESUME MODAL
+        resumeModalOpen && e("div", { className: "fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto" },
+          e("div", { className: "relative w-full max-w-4xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl max-h-[90vh] flex flex-col overflow-hidden my-8" },
+            e("div", { className: "px-6 py-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between" },
+              e("div", { className: "flex items-center gap-2" },
+                e("span", { className: "text-cyan-400 font-bold text-sm" }, "📄 ATS-Optimized Clean Resume"),
+                e("span", { className: "text-[11px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded" }, "Print / PDF Ready")
+              ),
+              e("div", { className: "flex items-center gap-3" },
+                e("button", { onClick: () => window.print(), className: "px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs transition-colors" }, "🖨️ Print / Save PDF"),
+                e("button", { onClick: () => setResumeModalOpen(false), className: "text-slate-400 hover:text-white text-2xl font-bold p-1" }, "✕")
+              )
+            ),
+            e("div", { className: "p-8 md:p-10 overflow-y-auto bg-white text-slate-900 font-sans", id: "printable-resume" },
+              e("div", { className: "text-center border-b border-slate-300 pb-3" },
+                e("h1", { className: "text-2xl font-extrabold text-slate-900 tracking-tight" }, "BOOMIKA R"),
+                e("p", { className: "text-xs font-bold text-cyan-800 uppercase tracking-widest mt-1" }, "MERN Full Stack Developer"),
+                e("div", { className: "text-xs text-slate-700 mt-2 flex flex-wrap justify-center gap-3" },
+                  e("span", null, "📞 +91 9361326817"), e("span", null, "•"),
+                  e("span", null, "✉️ boomikaboomi043@gmail.com"), e("span", null, "•"),
+                  e("span", null, "📍 Chennai, Tamil Nadu, India")
+                ),
+                e("div", { className: "text-xs text-slate-700 mt-1 flex flex-wrap justify-center gap-3" },
+                  e("a", { href: CANDIDATE.github, className: "text-blue-700 underline font-medium" }, "GitHub: Boomikarajenthiran"), e("span", null, "•"),
+                  e("a", { href: CANDIDATE.linkedin, className: "text-blue-700 underline font-medium" }, "LinkedIn: Boomika R")
+                )
+              ),
+              e("div", { className: "mt-4" },
+                e("h2", { className: "text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5" }, "Professional Summary"),
+                e("p", { className: "text-xs text-slate-800 leading-relaxed mt-2 text-justify" },
+                  "Aspiring MERN stack developer with a strong interest in building dynamic, responsive, and user-friendly web applications. Skilled in HTML, CSS, JavaScript, Bootstrap, and React.js, with knowledge of Node.js, Express.js, and MongoDB. Passionate about developing full-stack applications, creating RESTful APIs, and solving real-world problems. Winner of First Place in SLA Codethon 2026. Eager to contribute to a professional development team."
+                )
+              ),
+              e("div", { className: "mt-4" },
+                e("h2", { className: "text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5" }, "Education"),
+                e("div", { className: "mt-2 space-y-1 text-xs text-slate-800" },
+                  e("div", { className: "flex justify-between font-semibold" },
+                    e("span", null, "B.Sc. Computer Science • Musiri Institute of Technology, Trichy"),
+                    e("span", null, "2023 – 2026 | CGPA: 83.5%")
+                  ),
+                  e("div", { className: "flex justify-between" },
+                    e("span", null, "HSC • Government Girls Higher Secondary School"),
+                    e("span", null, "Score: 83%")
+                  ),
+                  e("div", { className: "flex justify-between" },
+                    e("span", null, "SSLC • Government Higher Secondary School"),
+                    e("span", null, "Score: 80%")
+                  )
+                )
+              ),
+              e("div", { className: "mt-4" },
+                e("h2", { className: "text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5" }, "Technical Skills"),
+                e("div", { className: "mt-2 text-xs text-slate-800 space-y-1" },
+                  e("p", null, e("strong", null, "Programming Languages: "), "JavaScript (ES6+), Core Java, Python, SQL"),
+                  e("p", null, e("strong", null, "Frontend Development: "), "React.js, Tailwind CSS, JavaScript, HTML5, CSS3, Bootstrap, Streamlit, Responsive UI Design"),
+                  e("p", null, e("strong", null, "Backend Development: "), "Node.js, Express.js, RESTful APIs, Core Java, JDBC"),
+                  e("p", null, e("strong", null, "Databases: "), "MongoDB (NoSQL), MySQL, Relational Schema Design"),
+                  e("p", null, e("strong", null, "Developer Tools: "), "Git, GitHub, VS Code, Chrome DevTools, Postman"),
+                  e("p", null, e("strong", null, "Engineering Concepts: "), "CRUD Operations, API Integration, Component Reusability, Debugging, Code Optimization, Problem Solving")
+                )
+              ),
+              e("div", { className: "mt-4" },
+                e("h2", { className: "text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5" }, "Projects"),
+                e("div", { className: "mt-2" },
+                  e("div", { className: "flex justify-between text-xs font-bold text-slate-900" },
+                    e("span", null, "Career Guidance & Placement Portal | Team Project"),
+                    e("a", { href: "https://github.com/Boomikarajenthiran/EmployeeSkillGapAnalyzer", className: "text-blue-700 underline font-normal" }, "GitHub Link")
+                  ),
+                  e("ul", { className: "list-disc list-inside text-xs text-slate-800 mt-1 space-y-0.5" },
+                    e("li", null, "Developed responsive Student and Admin dashboards with authentication, job listings, and application tracking features."),
+                    e("li", null, "Integrated front-end components with REST APIs to ensure seamless communication between React.js client and Core Java/MySQL backend.")
+                  ),
+                  e("p", { className: "text-[11px] text-slate-600 mt-0.5" }, e("strong", null, "Skills: "), "React.js, Tailwind CSS, JavaScript, Core Java, JDBC, REST API, MySQL, Git.")
+                ),
+                e("div", { className: "mt-3" },
+                  e("div", { className: "flex justify-between text-xs font-bold text-slate-900" },
+                    e("span", null, "Blink Guard - Driver Drowsiness Detection System | Team Project"),
+                    e("a", { href: "https://github.com/Boomikarajenthiran/BlinkGuard-TeamProject", className: "text-blue-700 underline font-normal" }, "GitHub Link")
+                  ),
+                  e("ul", { className: "list-disc list-inside text-xs text-slate-800 mt-1 space-y-0.5" },
+                    e("li", null, "Built a real-time driver fatigue monitoring system in Python to improve road safety through real-time camera tracking."),
+                    e("li", null, "Implemented eye blink detection to trigger audio and visual alerts when drowsiness is detected.")
+                  ),
+                  e("p", { className: "text-[11px] text-slate-600 mt-0.5" }, e("strong", null, "Skills: "), "Python, Fatigue Detection Algorithm, Real-Time Processing, Audio Alert Integration.")
+                )
+              ),
+              e("div", { className: "mt-4" },
+                e("h2", { className: "text-xs font-bold text-slate-900 uppercase tracking-wider border-b-2 border-slate-900 pb-0.5" }, "Certifications & Achievements"),
+                e("ul", { className: "list-disc list-inside text-xs text-slate-800 mt-2 space-y-1" },
+                  e("li", null, e("strong", null, "Secured First Place in SLA Codethon 2026"), " for developing a React Full Stack project."),
+                  e("li", null, e("strong", null, "Advanced Training in Full Stack Development"), ".")
+                )
+              )
+            )
+          )
+        ),
+
+        // 13. PROJECT DETAILS MODAL
+        selectedProject && e("div", { className: "fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4" },
+          e("div", { className: "relative w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 md:p-8 space-y-4" },
+            e("div", { className: "flex items-center justify-between border-b border-slate-800 pb-3" },
+              e("h3", { className: "text-lg md:text-xl font-bold text-white" }, selectedProject.title),
+              e("button", { onClick: () => setSelectedProject(null), className: "text-slate-400 hover:text-white text-2xl font-bold" }, "✕")
+            ),
+            e("div", { className: "text-xs md:text-sm text-slate-300 space-y-3 leading-relaxed" },
+              e("p", null, e("strong", null, "Architecture Pattern:")),
+              e("div", { className: "bg-slate-950 p-3 rounded-lg border border-slate-800 text-xs font-mono text-cyan-300" }, selectedProject.arch),
+              e("p", null, e("strong", null, "Technical Highlights:")),
+              e("ul", { className: "list-disc list-inside space-y-1 text-xs" },
+                selectedProject.points.map((pt, i) => e("li", { key: i }, pt))
+              ),
+              e("p", null, e("strong", null, "Tech Stack: "), selectedProject.tags.join(", "))
+            ),
+            e("div", { className: "pt-3 border-t border-slate-800 flex justify-end gap-3" },
+              e("a", { href: selectedProject.github, target: "_blank", className: "px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs transition-colors" }, "View GitHub Repo →"),
+              e("button", { onClick: () => setSelectedProject(null), className: "px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold" }, "Close")
+            )
+          )
+        )
+      );
+    }
+
+    // Mount React 18 Application
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(e(App));
+  </script>
+</body>
+</html>
